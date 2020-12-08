@@ -9,7 +9,9 @@ public interface UserDao extends JpaRepository<User,Integer> {
     //查询是否开户
     User queryByPhoneAndHaveAccount(String phone,byte account);
 
-    //
+
+
+
 
 
 

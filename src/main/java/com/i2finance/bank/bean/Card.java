@@ -1,6 +1,8 @@
 package com.i2finance.bank.bean;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,8 @@ import java.io.Serializable;
 
 @Data
 @Entity
+@DynamicInsert
+@DynamicUpdate
 public class Card implements Serializable {
     @Column(name = "c_id")
     @Id

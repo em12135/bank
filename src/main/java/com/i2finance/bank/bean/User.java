@@ -1,6 +1,8 @@
 package com.i2finance.bank.bean;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,10 +13,12 @@ import java.io.Serializable;
 //该注解代表是一个实体类
 @Entity
 @Data
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "user")
 public class User implements Serializable {
     @Id
-    @Column(name = "uid")
+    @Column(name = "u_id")
     private int id;
     @Column(name = "u_name")
     private String name;
