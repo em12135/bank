@@ -5,6 +5,8 @@ import com.i2finance.bank.bean.User;
 import com.i2finance.bank.dao.CardDao;
 import com.i2finance.bank.dao.UserDao;
 import com.i2finance.bank.service.impl.UserServiceImpl;
+import com.i2finance.bank.util.Result;
+import com.i2finance.bank.util.StatusCode;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -64,6 +66,14 @@ class BankApplicationTests {
         user.setHaveAccount((byte) 0);
         boolean b = userService.haveAccount(user);
         System.out.println(b);
+    }
+
+    @Test
+    void test_stateCode(){
+        //System.out.println(StatusCode.USER_NOT_EXIST.getCode()+StatusCode.USER_NOT_EXIST.getMessage());
+        Result result = new Result(StatusCode.USER_NOT_EXIST);
+
+        System.out.println(result);
     }
 
 }

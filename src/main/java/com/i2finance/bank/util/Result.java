@@ -20,6 +20,10 @@ public class Result<T> implements Serializable {
         this.data = data;
     }
 
+    public Result(StatusCode statusCode) {
+        this(statusCode, null);
+    }
+
     //业务成功,也携带了数据
     public static <E> Result success(E data) {
         return new Result<E>(StatusCode.SUCCESS, data);
@@ -27,8 +31,11 @@ public class Result<T> implements Serializable {
 
     //业务失败,携带数据
     public static <F> Result fail(StatusCode statusCode, F data) {
-        return new Result<>(statusCode,data);
+        return new Result<>(statusCode, data);
     }
 
-
+    //业务失败,无返回数据
+    public static Result fail(StatusCode statusCode){
+        return new Result(statusCode);
+    }
 }
