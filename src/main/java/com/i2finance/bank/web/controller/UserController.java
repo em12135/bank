@@ -31,4 +31,14 @@ public class UserController {
         return userService.login(phone, password);
     }
 
+    @ApiOperation("用户注册")
+    @PostMapping("/register")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "phone", value = "登录手机号", required = true),
+            @ApiImplicitParam(name = "password", value = "登录密码", required = true)
+    })
+    public Result register(String phone,String password){
+        return userService.register(phone,password);
+    }
+
 }

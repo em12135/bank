@@ -29,6 +29,11 @@ public class Result<T> implements Serializable {
         return new Result<E>(StatusCode.SUCCESS, data);
     }
 
+    //业务成功,未携带数据
+    public static Result success(){
+        return new Result(StatusCode.SUCCESS);
+    }
+
     //业务失败,携带数据
     public static <F> Result fail(StatusCode statusCode, F data) {
         return new Result<>(statusCode, data);

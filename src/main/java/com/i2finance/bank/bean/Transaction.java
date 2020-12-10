@@ -25,4 +25,6 @@ public class Transaction implements Serializable {
     private String tOutBankCode;
     private double tOutMoney;
     private Date  tTime;
+
+    private int tCardId;
 }
