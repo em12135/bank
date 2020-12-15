@@ -37,8 +37,19 @@ public class UserController {
             @ApiImplicitParam(name = "phone", value = "登录手机号", required = true),
             @ApiImplicitParam(name = "password", value = "登录密码", required = true)
     })
-    public Result register(String phone,String password){
-        return userService.register(phone,password);
+    public Result register(String phone, String password) {
+        return userService.register(phone, password);
+    }
+
+    @ApiOperation("用户开户")
+    @PostMapping("/createAccount")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "name",value = "开户姓名",required = true),
+            @ApiImplicitParam(name = "code",value = "身份证号码",required = true)
+    })
+    public Result openAccount(String name, String code) {
+
+        return userService.createAccount(name, code);
     }
 
 }

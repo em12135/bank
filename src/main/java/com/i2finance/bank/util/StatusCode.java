@@ -16,7 +16,8 @@ public enum StatusCode {
     /* 用户错误：20001-29999*/
     USER_NOT_LOGIN(20001, "用户未登录"),
     USER_LOGIN_ERROR(20002, "账号不存在或密码错误"),
-    USER_ACCOUNT_FORBIDDEN(20003, "账号已被禁用"),
+    USER_ALREADY_HAVE_ACCOUNT(20003, "用户已经开通账户"),
+    USER_NOT_HAVE_ACCOUNT(20003, "用户未开通账户"),
     USER_NOT_EXIST(20004, "用户不存在"),
     USER_HAS_EXISTED(20005, "用户已存在"),
 
@@ -26,10 +27,10 @@ public enum StatusCode {
     /* 系统错误：40001-49999 */
     SYSTEM_INNER_ERROR(40001, "系统内部错误，请稍后重试"),
 
-    /* 数据错误：50001-599999 */
-    DATA_NONE(50001, "数据未找到"),
-    DATA_WRONG(50002, "数据错误"),
-    DATA_EXISTED(50003, "数据已存在"),
+    /* 银行卡错误：50001-599999 */
+    DATA_ERROR(50001, "收款人信息填写有误"),
+    CARD_NOT_EXIST(50002, "收款卡号不存在"),
+    CARD_EXISTED(50003, "银行卡已存在"),
 
     /* 接口错误：60001-69999 */
     INTERFACE_INNER_INVOKE_ERROR(60001, "内部系统接口调用异常"),

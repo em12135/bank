@@ -59,14 +59,14 @@ class BankApplicationTests {
     }
 
     //测试返回值是否为空
-    @Test
-    void test_userService(){
-        User user = new User();
-        user.setPhone("321");
-        user.setHaveAccount((byte) 0);
-        boolean b = userService.haveAccount(user);
-        System.out.println(b);
-    }
+//    @Test
+//    void test_userService(){
+//        User user = new User();
+//        user.setPhone("321");
+//        user.setHaveAccount((byte) 0);
+//        boolean b = userService.haveAccount(user);    //该方法已删除 之前测试通过
+//        System.out.println(b);
+//    }
 
     @Test
     void test_stateCode(){

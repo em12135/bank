@@ -5,6 +5,7 @@ import com.i2finance.bank.dao.UserDao;
 import com.i2finance.bank.exception.BankException;
 import com.i2finance.bank.service.IUserService;
 import com.i2finance.bank.util.JwtTokenUtils;
+import com.i2finance.bank.util.LoginUser;
 import com.i2finance.bank.util.Result;
 import com.i2finance.bank.util.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,6 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private StringRedisTemplate redisTemplate;
 
-    //判断手机号是否已经存在
-    @Override
-    public User isExist(String phone) {
-        return userDao.queryByPhone(phone);
-    }
-
     //注册功能
     @Override
     public Result register(String phone, String password) {
@@ -45,15 +40,15 @@ public class UserServiceImpl implements IUserService {
     }
 
     //判断是否开户
-    @Override
-    public boolean haveAccount(User user) {
-        User person = userDao.queryByPhoneAndHaveAccount(user.getPhone(), user.getHaveAccount());
-        if (Objects.isNull(person)) {
-            //为空表明没有数据,未开户
-            return false;
-        }
-        return true;
-    }
+//    @Override
+//    public boolean haveAccount(User user) {
+//        User person = userDao.queryByPhoneAndHaveAccount(user.getPhone(), user.getHaveAccount());
+//        if (Objects.isNull(person)) {
+//            //为空表明没有数据,未开户
+//            return false;
+//        }
+//        return true;
+//    }
 
     //登录功能
     @Override
@@ -69,6 +64,8 @@ public class UserServiceImpl implements IUserService {
             throw new BankException(StatusCode.USER_LOGIN_ERROR);
         }
 
+        LoginUser.user = user;   //保存当前登录的用户
+
         //登录成功,根据手机号产生token
         String token = JwtTokenUtils.createToken(phone);
 
@@ -82,13 +79,27 @@ public class UserServiceImpl implements IUserService {
         return Result.success(token);
     }
 
+
+    //用户开户
     @Override
-    public Result createAccount() {
+    public Result createAccount(String name, String code) {
+        User user = LoginUser.user;
+        User isAccount = userDao.queryByPhoneAndHaveAccount(user.getPhone(), (byte) 1);
 
-        return null;
+        if (Objects.isNull(isAccount)) {
+            //未开户
+            user.setName(name);
+            user.setCode(code);
+            user.setHaveAccount((byte) 1);
+            //更新数据
+            userDao.save(user);
+
+            return Result.success();
+        } else {
+            //用户已经开过户
+            throw new BankException(StatusCode.USER_ALREADY_HAVE_ACCOUNT);
+        }
     }
 
-    public void getAccount() {
 
-    }
 }
